@@ -22,14 +22,28 @@ textarea {
   margin-bottom: 1rem;
   width: 100%;
   max-width: 40rem;
+  padding: 0.75rem;
   background-color: #252631;
   color: #f3f4f6;
   border: 1px solid #5b5d6b;
 }
 
+textarea:focus-visible {
+  outline: 3 px solid #93c5fd;
+  outline-offset: 3px;
+}
+
 button {
   padding: 0.5rem 1rem;
   cursor: pointer;
+  background-color: #f3f4f6;
+  color: #16171d;
+  border: 1px solid #f3f4f6;
+}
+
+button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
 }
 
 .result-placeholder {

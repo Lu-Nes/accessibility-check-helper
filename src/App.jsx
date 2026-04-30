@@ -16,7 +16,7 @@ function App() {
           placeholder="Füge hier deinen HTML-Code ein"
         ></textarea>
 
-        <button>HTML prüfen</button>
+        <button type="button">HTML prüfen</button>
       </section>
 
       <section className="result-section">
