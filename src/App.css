@@ -31,3 +31,7 @@ button {
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
+
+.result-placeholder {
+  margin-top: 0.5rem;
+}
