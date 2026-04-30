@@ -26,3 +26,8 @@ textarea {
   color: #f3f4f6;
   border: 1px solid #5b5d6b;
 }
+
+button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
