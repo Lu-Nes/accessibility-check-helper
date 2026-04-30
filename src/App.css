@@ -1,12 +1,13 @@
 /* Styling für die sichtbare App-Oberfläche */
 
-main {
+.app {
   max-width: 60rem;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
 
-section {
+.input-section,
+.result-section {
   margin-top: 2rem;
 }
 
