@@ -22,7 +22,9 @@ function App() {
       <section className="result-section">
         <h2>Ergebnisse</h2>
 
-        <p className="result-placeholder">Füge HTML-Code ein und starte die Prüfung, um Ergebnisse zu sehen.</p>
+        <p className="result-placeholder">
+          Füge HTML-Code ein und starte die Prüfung, um Ergebnisse zu sehen.
+        </p>
       </section>
     </main>
   );
