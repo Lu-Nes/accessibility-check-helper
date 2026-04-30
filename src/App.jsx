@@ -10,11 +10,11 @@ function App() {
 
         <label htmlFor="html-input">HTML-Code eingeben</label>
 
-        <textarea 
+        <textarea
           id="html-input"
           rows="8"
           placeholder="Füge hier deinen HTML-Code ein"
-          ></textarea>
+        ></textarea>
 
         <button>HTML prüfen</button>
       </section>
