@@ -11,6 +11,19 @@
   margin-top: 2rem;
 }
 
+.result-section {
+  width: 100%;
+  max-width: 40rem;
+  padding: 1rem;
+  background-color: #252631;
+  border: 1px solid #5b5d6b;
+  border-radius: 0.75rem;
+}
+
+.result-section h2 {
+  margin-bottom: 0.5rem;
+}
+
 label,
 textarea,
 button {
@@ -26,10 +39,11 @@ textarea {
   background-color: #252631;
   color: #f3f4f6;
   border: 1px solid #5b5d6b;
+  border-radius: 0.5rem;
 }
 
 textarea:focus-visible {
-  outline: 3 px solid #93c5fd;
+  outline: 3px solid #93c5fd;
   outline-offset: 3px;
 }
 
@@ -39,6 +53,7 @@ button {
   background-color: #f3f4f6;
   color: #16171d;
   border: 1px solid #f3f4f6;
+  border-radius: 0.5rem;
 }
 
 button:focus-visible {
@@ -47,5 +62,5 @@ button:focus-visible {
 }
 
 .result-placeholder {
-  margin-top: 0.5rem;
+  margin-top: 0;
 }
