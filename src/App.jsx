@@ -4,6 +4,12 @@ import "./App.css";
 function App() {
   const [htmlInput, setHtmlInput] = useState("");
 
+  const handleCheckHtml = () => {
+    if (htmlInput.trim() === "") {
+      return;
+    }
+  };
+
   return (
     <main className="app">
       <h1>Accessibility Check Helper</h1>
@@ -21,7 +27,7 @@ function App() {
           onChange={(event) => setHtmlInput(event.target.value)}
         ></textarea>
 
-        <button type="button">HTML prüfen</button>
+        <button type="button" onClick={handleCheckHtml}>HTML prüfen</button>
       </section>
 
       <section className="result-section">
