@@ -3,11 +3,14 @@ import "./App.css";
 
 function App() {
   const [htmlInput, setHtmlInput] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
 
   const handleCheckHtml = () => {
     if (htmlInput.trim() === "") {
+      setFeedbackMessage("Bitte gib zuerst HTML-Code ein.");
       return;
     }
+    setFeedbackMessage("");
   };
 
   return (
@@ -33,9 +36,13 @@ function App() {
       <section className="result-section">
         <h2>Ergebnisse</h2>
 
-        <p className="result-placeholder">
-          Füge HTML-Code ein und starte die Prüfung, um Ergebnisse zu sehen.
-        </p>
+        {feedbackMessage !== "" ? (
+          <p className="result-placeholder">{feedbackMessage}</p>
+        ) : (
+          <p className="result-placeholder">
+            Füge HTML-Code ein und starte die Prüfung, um Ergebnisse zu sehen.
+          </p>
+        )}
       </section>
     </main>
   );
