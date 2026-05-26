@@ -1,6 +1,9 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [htmlInput, setHtmlInput] = useState("");
+
   return (
     <main className="app">
       <h1>Accessibility Check Helper</h1>
@@ -14,6 +17,8 @@ function App() {
           id="html-input"
           rows="8"
           placeholder="Füge hier deinen HTML-Code ein"
+          value={htmlInput}
+          onChange={(event) => setHtmlInput(event.target.value)}
         ></textarea>
 
         <button type="button">HTML prüfen</button>
