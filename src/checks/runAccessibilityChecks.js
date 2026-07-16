@@ -1,14 +1,17 @@
-// Hauptfunktion für die späteren Accessibility-Prüfungen
+import { checkMissingAlt } from "./checkMissingAlt";
+import { checkMissingLabels } from "./checkMissingLabels";
+import { checkEmptyButtons } from "./checkEmptyButtons";
+import { checkMissingH1 } from "./checkMissingH1";
+
 export const runAccessibilityChecks = (htmlInput) => {
   const preparedHtml = htmlInput.trim();
+  const parser = new DOMParser();
+  const document = parser.parseFromString(preparedHtml, "text/html");
 
   return [
-    {
-      ruleName: "HTML-Eingabe",
-      status: "info",
-      explanation: "Der HTML-Code wurde für die Prüfung vorbereitet.",
-      recommendation:
-        `Aktuell enthält die Eingabe ${preparedHtml.length} Zeichen. Als Nächstes werden konkrete Accessibility-Regeln ergänzt.`
-    }
+    checkMissingAlt(document),
+    checkMissingLabels(document),
+    checkEmptyButtons(document),
+    checkMissingH1(document)
   ];
 };
