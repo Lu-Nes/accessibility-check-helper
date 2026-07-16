@@ -25,11 +25,13 @@ Der MVP bleibt bewusst klein.
 
 - Arbeite in kleinen, klar abgegrenzten Schritten.
 - Orientiere dich immer am tatsächlichen aktuellen Projektstand.
+- Codex ist ein punktuelles Hilfswerkzeug, kein dauerhafter Pflicht-Zwischenschritt.
 - Erfinde keine neue Projektstruktur, wenn sie nicht ausdrücklich beauftragt wurde.
 - Baue keine ungefragten Zusatzfeatures ein.
 - Führe keine großen Refactorings durch.
 - Halte den MVP klein und nachvollziehbar.
 - Trenne UI und Prüflogik sauber voneinander.
+- Vermeide künstlich kleinteilige Kontrollschleifen, wenn eine Aufgabe klar und übersichtlich ist.
 
 ## Coding-Stil
 
@@ -96,3 +98,7 @@ Vor einer Übernahme müssen Änderungen geprüft werden:
 ## Standardregel
 
 Wenn eine Aufgabe unklar ist, soll Codex zuerst nachfragen oder einen kurzen Plan vorschlagen, statt selbstständig größere Änderungen vorzunehmen.
+
+Wenn eine Aufgabe klar, klein und gut abgegrenzt ist, soll Codex nicht unnötig blockieren, sondern einen passenden kleinen Vorschlag machen.
+
+Codex soll keine künstlichen Mini-Kontrollschleifen erzeugen und keine Grundsatzdiskussionen neu starten, wenn die relevanten Projektregeln bereits in dieser Datei oder den Projektunterlagen festgelegt sind.
