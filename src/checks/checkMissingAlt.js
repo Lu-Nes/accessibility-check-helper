@@ -14,7 +14,9 @@ export const checkMissingAlt = (document) => {
   return {
     ruleName: "Bilder mit alt-Attribut",
     status: "error",
-    explanation: `${imagesWithoutAlt.length} Bild(er) besitzen kein alt-Attribut.`,
+    explanation: imagesWithoutAlt.length === 1
+      ? "Ein Bild besitzt kein alt-Attribut."
+      : `${imagesWithoutAlt.length} Bilder besitzen kein alt-Attribut.`,
     recommendation: "Ergänze für jedes Bild ein passendes alt-Attribut."
   };
 };

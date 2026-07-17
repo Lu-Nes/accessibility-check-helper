@@ -55,7 +55,9 @@ export const checkEmptyButtons = (document) => {
   return {
     ruleName: "Verständlich benannte Buttons",
     status: "error",
-    explanation: `${unclearButtons.length} Button(s) sind leer oder unverständlich benannt.`,
+    explanation: unclearButtons.length === 1
+      ? "Ein Button ist leer oder unverständlich benannt."
+      : `${unclearButtons.length} Buttons sind leer oder unverständlich benannt.`,
     recommendation: "Gib jedem betroffenen Button eine eindeutige Benennung, die seine Funktion beschreibt."
   };
 };
