@@ -53,6 +53,11 @@
   color: #b6c0c4;
 }
 
+.header-about-button {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
 .app-main {
   display: grid;
   flex: 1;
@@ -269,6 +274,100 @@
   outline-offset: 3px;
 }
 
+.secondary-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  border: 1px solid #79c8c9;
+  border-radius: 0.65rem;
+  background-color: transparent;
+  color: #d8eeee;
+  font: inherit;
+  font-weight: 700;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.secondary-button:hover {
+  background-color: #203438;
+  color: #ffffff;
+}
+
+.secondary-button:active {
+  transform: translateY(1px);
+}
+
+.secondary-button:focus-visible,
+.result-heading h2:focus-visible {
+  outline: 3px solid #79c8c9;
+  outline-offset: 3px;
+}
+
+.check-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 1.25rem;
+}
+
+.check-actions .primary-button {
+  margin-top: 0;
+}
+
+.shortcut-hint {
+  color: #b6c0c4;
+  font-size: 0.875rem;
+}
+
+.shortcut-hint kbd {
+  padding: 0.12rem 0.35rem;
+  border: 1px solid #65777f;
+  border-bottom-width: 2px;
+  border-radius: 0.3rem;
+  background-color: #0d1215;
+  color: #e7eeee;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.about-dialog {
+  width: min(100% - 2rem, 36rem);
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #65777f;
+  border-radius: 1rem;
+  background-color: #182025;
+  color: #d5dcde;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 50%);
+}
+
+.about-dialog::backdrop {
+  background-color: rgb(4 9 11 / 78%);
+}
+
+.about-dialog-content {
+  padding: clamp(1.25rem, 5vw, 2rem);
+}
+
+.about-dialog h2 {
+  color: #f4f6f7;
+  font-size: clamp(1.3rem, 4vw, 1.65rem);
+  line-height: 1.3;
+}
+
+.about-dialog p {
+  margin-top: 1rem;
+  color: #c5cdd0;
+}
+
+.about-dialog form {
+  margin-top: 1.5rem;
+}
+
 .result-heading {
   margin-bottom: 1.25rem;
 }
@@ -338,6 +437,12 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
 }
 
 .result-item {
@@ -465,6 +570,12 @@
 
   .header-content {
     align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .header-about-button {
+    width: 100%;
+    margin-left: 0;
   }
 
   .brand-mark {
@@ -489,11 +600,23 @@
   .status-label {
     align-self: flex-start;
   }
+
+  .check-actions,
+  .result-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .check-actions .primary-button,
+  .result-actions .secondary-button {
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .code-input textarea,
-  .primary-button {
+  .primary-button,
+  .secondary-button {
     transition: none;
   }
 }

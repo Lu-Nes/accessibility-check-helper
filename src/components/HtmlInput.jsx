@@ -5,8 +5,15 @@ export const HtmlInput = ({
   onCheck
 }) => {
   const describedBy = inputError === ""
-    ? "html-input-help"
-    : "html-input-help html-input-error";
+    ? "html-input-help html-input-shortcut"
+    : "html-input-help html-input-shortcut html-input-error";
+
+  const handleInputKeyDown = (event) => {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      onCheck(event);
+    }
+  };
 
   return (
     <section className="section-card input-card" aria-labelledby="input-heading">
@@ -31,8 +38,10 @@ export const HtmlInput = ({
               placeholder={'Zum Beispiel: <img src="bild.jpg" alt="Beschreibung">'}
               value={htmlInput}
               onChange={onInputChange}
+              onKeyDown={handleInputKeyDown}
               aria-describedby={describedBy}
               aria-invalid={inputError !== "" ? "true" : undefined}
+              aria-keyshortcuts="Control+Enter Meta+Enter"
             ></textarea>
             {inputError !== "" && (
               <p id="html-input-error" className="input-error" role="alert">
@@ -56,13 +65,18 @@ export const HtmlInput = ({
           </aside>
         </div>
 
-        <button className="primary-button" type="submit">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <circle cx="11" cy="11" r="6"></circle>
-            <path d="m16 16 4 4"></path>
-          </svg>
-          HTML prüfen
-        </button>
+        <div className="check-actions">
+          <button className="primary-button" type="submit">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="6"></circle>
+              <path d="m16 16 4 4"></path>
+            </svg>
+            HTML prüfen
+          </button>
+          <p id="html-input-shortcut" className="shortcut-hint">
+            Tastenkürzel: <kbd>Strg</kbd>/<kbd>⌘</kbd> + <kbd>Enter</kbd>
+          </p>
+        </div>
       </form>
     </section>
   );
