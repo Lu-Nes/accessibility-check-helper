@@ -55,7 +55,9 @@ export const checkMissingLabels = (document) => {
   return {
     ruleName: "Beschriftete Formularfelder",
     status: "error",
-    explanation: `${fieldsWithoutLabel.length} Formularfeld(er) besitzen keine zugängliche Beschriftung.`,
+    explanation: fieldsWithoutLabel.length === 1
+      ? "Ein Formularfeld besitzt keine zugängliche Beschriftung."
+      : `${fieldsWithoutLabel.length} Formularfelder besitzen keine zugängliche Beschriftung.`,
     recommendation: "Verknüpfe jedes betroffene Feld mit einem Label oder einer passenden ARIA-Beschriftung."
   };
 };

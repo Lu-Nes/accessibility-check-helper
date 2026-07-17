@@ -1,68 +1,76 @@
 import { useState } from "react";
 import "./App.css";
 import { runAccessibilityChecks } from "./checks/runAccessibilityChecks";
+import { HtmlInput } from "./components/HtmlInput";
+import { ResultList } from "./components/ResultList";
 
 function App() {
   const [htmlInput, setHtmlInput] = useState("");
-  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [inputError, setInputError] = useState("");
   const [checkResults, setCheckResults] = useState([]);
+  const [checkRunCount, setCheckRunCount] = useState(0);
 
-  const handleCheckHtml = () => {
+  const handleInputChange = (event) => {
+    setHtmlInput(event.target.value);
+
+    if (inputError !== "") {
+      setInputError("");
+    }
+  };
+
+  const handleCheckHtml = (event) => {
+    event.preventDefault();
+
     if (htmlInput.trim() === "") {
-      setFeedbackMessage("Bitte gib zuerst HTML-Code ein.");
+      setInputError("Bitte gib zuerst HTML-Code ein.");
       setCheckResults([]);
       return;
     }
 
     const results = runAccessibilityChecks(htmlInput);
 
-    setFeedbackMessage("");
+    setInputError("");
     setCheckResults(results);
+    setCheckRunCount((currentCount) => currentCount + 1);
   };
 
   return (
-    <main className="app">
-      <h1>Accessibility Check Helper</h1>
+    <div className="app-shell">
+      <header className="site-header">
+        <div className="header-content">
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" focusable="false">
+              <circle cx="24" cy="24" r="20"></circle>
+              <path d="m14 24 7 7 14-16"></path>
+            </svg>
+          </span>
+          <div>
+            <h1>Accessibility Check Helper</h1>
+            <p>Prüfe einfache Accessibility-Basics in deinem HTML-Code.</p>
+          </div>
+        </div>
+      </header>
 
-      <section className="input-section">
-        <h2>HTML-Code prüfen</h2>
+      <main className="app-main">
+        <HtmlInput
+          htmlInput={htmlInput}
+          inputError={inputError}
+          onInputChange={handleInputChange}
+          onCheck={handleCheckHtml}
+        />
+        <ResultList
+          checkResults={checkResults}
+          checkRunCount={checkRunCount}
+        />
+      </main>
 
-        <label htmlFor="html-input">HTML-Code eingeben</label>
-
-        <textarea
-          id="html-input"
-          rows="8"
-          placeholder="Füge hier deinen HTML-Code ein"
-          value={htmlInput}
-          onChange={(event) => setHtmlInput(event.target.value)}
-        ></textarea>
-
-        <button type="button" onClick={handleCheckHtml}>HTML prüfen</button>
-      </section>
-
-      <section className="result-section">
-        <h2>Ergebnisse</h2>
-
-        {feedbackMessage !== "" ? (
-          <p className="result-placeholder">{feedbackMessage}</p>
-        ) : checkResults.length > 0 ? (
-          <ul>
-            {checkResults.map((result) => (
-              <li key={result.ruleName}>
-                <h3>{result.ruleName}</h3>
-                <p>Status: {result.status}</p>
-                <p>{result.explanation}</p>
-                <p>{result.recommendation}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="result-placeholder">
-            Füge HTML-Code ein und starte die Prüfung, um Ergebnisse zu sehen.
-          </p>
-)}
-      </section>
-    </main>
+      <footer className="site-footer">
+        <div className="footer-content">
+          <p><span aria-hidden="true">♡</span> Mit Fokus auf Accessibility entwickelt.</p>
+          <p>Version 0.1.0 (MVP)</p>
+        </div>
+      </footer>
+    </div>
   );
 }
 
