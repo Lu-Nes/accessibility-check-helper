@@ -1,9 +1,16 @@
+import { useRef } from "react";
 import { ResultItem } from "./ResultItem";
 
-export const ResultList = ({ checkResults, checkRunCount }) => {
+export const ResultList = ({ checkResults, checkRunCount, onClearResults }) => {
+  const headingRef = useRef(null);
   const hasResults = checkResults.length > 0;
   const issueCount = checkResults.filter((result) => result.status === "error").length;
   let summary = "";
+
+  const handleClearResults = () => {
+    onClearResults();
+    headingRef.current?.focus();
+  };
 
   if (hasResults && issueCount === 0) {
     summary = "Prüfung abgeschlossen: Alle vier Accessibility-Basics sind erfüllt.";
@@ -18,7 +25,7 @@ export const ResultList = ({ checkResults, checkRunCount }) => {
       <div className="section-heading result-heading">
         <span className="step-marker result-step" aria-hidden="true">2</span>
         <div>
-          <h2 id="results-heading">Ergebnisse</h2>
+          <h2 id="results-heading" ref={headingRef} tabIndex="-1">Ergebnisse</h2>
           <p>Hier siehst du die Auswertung der vier Accessibility-Basics.</p>
         </div>
       </div>
@@ -37,11 +44,22 @@ export const ResultList = ({ checkResults, checkRunCount }) => {
       </p>
 
       {hasResults ? (
-        <ul className="result-list">
-          {checkResults.map((result) => (
-            <ResultItem key={result.ruleName} result={result} />
-          ))}
-        </ul>
+        <>
+          <ul className="result-list">
+            {checkResults.map((result) => (
+              <ResultItem key={result.ruleName} result={result} />
+            ))}
+          </ul>
+          <div className="result-actions">
+            <button
+              className="secondary-button"
+              type="button"
+              onClick={handleClearResults}
+            >
+              Ergebnisse löschen
+            </button>
+          </div>
+        </>
       ) : (
         <div className="empty-results">
           <svg className="empty-illustration" viewBox="0 0 120 96" aria-hidden="true" focusable="false">

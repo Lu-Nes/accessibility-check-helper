@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { runAccessibilityChecks } from "./checks/runAccessibilityChecks";
+import { AboutToolDialog } from "./components/AboutToolDialog";
 import { HtmlInput } from "./components/HtmlInput";
 import { ResultList } from "./components/ResultList";
 
@@ -34,6 +35,11 @@ function App() {
     setCheckRunCount((currentCount) => currentCount + 1);
   };
 
+  const handleClearResults = () => {
+    setCheckResults([]);
+    setCheckRunCount(0);
+  };
+
   return (
     <div className="app-shell">
       <header className="site-header">
@@ -48,6 +54,7 @@ function App() {
             <h1>Accessibility Check Helper</h1>
             <p>Prüfe einfache Accessibility-Basics in deinem HTML-Code.</p>
           </div>
+          <AboutToolDialog />
         </div>
       </header>
 
@@ -61,6 +68,7 @@ function App() {
         <ResultList
           checkResults={checkResults}
           checkRunCount={checkRunCount}
+          onClearResults={handleClearResults}
         />
       </main>
 
