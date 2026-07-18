@@ -4,6 +4,14 @@
 
 Der Accessibility Check Helper ist eine kleine React-Anwendung, mit der sich eingefügter HTML-Code auf vier grundlegende Accessibility-Basics prüfen lässt. Die Ergebnisse werden verständlich mit Status, kurzer Erklärung und einer Empfehlung dargestellt.
 
+## Live-Demo
+
+Der Accessibility Check Helper kann direkt im Browser ausprobiert werden:
+
+[Live-Demo auf Render öffnen](https://accessibility-check-helper.onrender.com)
+
+Die veröffentlichte Version wird automatisch aus dem stabilen `main`-Branch gebaut.
+
 ## Ziel
 
 Das Projekt soll einen einfachen Einstieg in typische Barrierefreiheitsprobleme bieten. Es macht einige automatisierbare Auffälligkeiten sichtbar und zeigt zugleich, dass Accessibility auch in der eigenen Bedienoberfläche mitgedacht werden kann.
