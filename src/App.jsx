@@ -1,122 +1,85 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { runAccessibilityChecks } from "./checks/runAccessibilityChecks";
+import { AboutToolDialog } from "./components/AboutToolDialog";
+import { HtmlInput } from "./components/HtmlInput";
+import { ResultList } from "./components/ResultList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [htmlInput, setHtmlInput] = useState("");
+  const [inputError, setInputError] = useState("");
+  const [checkResults, setCheckResults] = useState([]);
+  const [checkRunCount, setCheckRunCount] = useState(0);
+
+  const handleInputChange = (event) => {
+    setHtmlInput(event.target.value);
+
+    if (inputError !== "") {
+      setInputError("");
+    }
+  };
+
+  const handleCheckHtml = (event) => {
+    event.preventDefault();
+
+    if (htmlInput.trim() === "") {
+      setInputError("Bitte gib zuerst HTML-Code ein.");
+      setCheckResults([]);
+      return;
+    }
+
+    const results = runAccessibilityChecks(htmlInput);
+
+    setInputError("");
+    setCheckResults(results);
+    setCheckRunCount((currentCount) => currentCount + 1);
+  };
+
+  const handleClearResults = () => {
+    setCheckResults([]);
+    setCheckRunCount(0);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="app-shell">
+      <header className="site-header">
+        <div className="header-content">
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" focusable="false">
+              <circle cx="24" cy="24" r="20"></circle>
+              <path d="m14 24 7 7 14-16"></path>
+            </svg>
+          </span>
+          <div>
+            <h1>Accessibility Check Helper</h1>
+            <p>Prüfe einfache Accessibility-Basics in deinem HTML-Code.</p>
+          </div>
+          <AboutToolDialog />
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="app-main">
+        <HtmlInput
+          htmlInput={htmlInput}
+          inputError={inputError}
+          onInputChange={handleInputChange}
+          onCheck={handleCheckHtml}
+        />
+        <ResultList
+          checkResults={checkResults}
+          checkRunCount={checkRunCount}
+          onClearResults={handleClearResults}
+        />
+      </main>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <footer className="site-footer">
+        <div className="footer-content">
+          <p><span aria-hidden="true">♡</span> Mit Fokus auf Accessibility entwickelt.</p>
+          <p>Version 0.1.0 (MVP)</p>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
